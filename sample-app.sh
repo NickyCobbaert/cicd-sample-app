@@ -1,9 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
-mkdir tempdir
-mkdir tempdir/templates
-mkdir tempdir/static
+mkdir -p tempdir
+mkdir -p tempdir/templates
+mkdir -p tempdir/static
+
+docker rm samplerunning # destroy the container if already active
 
 cp sample_app.py tempdir/.
 cp -r templates/* tempdir/templates/.
