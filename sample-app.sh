@@ -5,10 +5,9 @@ mkdir -p tempdir
 mkdir -p tempdir/templates
 mkdir -p tempdir/static
 
-docker stop -f samplerunning ||
-docker rm -f samplerunning || # destroy the container if already active (or true if not)
-
+docker rm -f samplerunning || true
 cp sample_app.py tempdir/.
+
 cp -r templates/* tempdir/templates/.
 cp -r static/* tempdir/static/.
 
