@@ -69,7 +69,7 @@ node {
             
             # We spin up a temporary 'curl' container and attach it to the Compose network.
             # This guarantees DNS resolution (using the service name 'todoapp') and network reachability.
-            docker run --rm --network todoapppipeline_default curlimages/curl \
+            docker run --rm --network dotnet-app-pipeline_default curlimages/curl \
                 --retry 5 --retry-delay 3 --retry-connrefused \
                 -s http://todoapp:8080/ | grep -i "Todo" || (echo "App failed to start!" && exit 1)
                 
