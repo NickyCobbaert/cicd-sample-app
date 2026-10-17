@@ -1,7 +1,7 @@
 node {
     stage('Clean Environment') {
         catchError(buildResult: 'SUCCESS') {
-            sh 'docker-compose down -v || true'
+            sh 'docker compose down -v || true'
             sh 'docker container rm -f todoapppipeline-todoapp || true'
             sh 'docker container rm -f todoapppipeline-todoappdb || true'
         }
@@ -25,8 +25,8 @@ node {
     }
 
     stage('Start Database') {
-        sh 'docker-compose build'
-        sh 'docker-compose up -d todoappdb'
+        sh 'docker compose build'
+        sh 'docker compose up -d todoappdb'
         
         // Wait for the database to pass its healthcheck
         sh '''
@@ -43,7 +43,7 @@ node {
             
             if [ "$STATUS" != '"healthy"' ]; then
                 echo "MariaDB failed to become healthy!"
-                docker-compose logs todoappdb
+                docker compose logs todoappdb
                 exit 1
             fi
         '''
@@ -56,7 +56,7 @@ node {
     }
 
     stage('Start App') {
-        sh 'docker-compose up -d todoapp'
+        sh 'docker compose up -d todoapp'
     }
 
     stage('Wait for Initialization') {
