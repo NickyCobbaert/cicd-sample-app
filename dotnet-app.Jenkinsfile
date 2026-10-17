@@ -1,9 +1,4 @@
 node {
-    stage ("install compose") {
-        sh 'apt-get update -y'
-        sh 'apt-get install -y docker.io docker-compose'
-    }
-
     stage('Clean Environment') {
         catchError(buildResult: 'SUCCESS') {
             sh 'docker compose down -v || true'
